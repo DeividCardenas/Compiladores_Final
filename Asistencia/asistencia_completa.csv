@@ -1,0 +1,301 @@
+id_estudiante,nombre,curso,fecha,asistio,justificacion,promedio_notas,telefono_contacto,correo,tutor
+1,Carlos Pérez,10A,2024-04-01,Sí,,4.3,3100000001,carlos@example.com,Ana Pérez
+2,Laura Torres,10A,2024-04-01,No,Enfermedad,4.7,3100000002,laura@example.com,Luis Torres
+3,Andrés Rojas,9B,2024-04-01,Sí,,3.8,3100000003,andres@example.com,Marta Rojas
+4,Lucía Fernández,11A,2024-04-01,No,Cita médica,4.9,3100000004,lucia@example.com,Ricardo Fernández
+5,Mateo Ramírez,10B,2024-04-01,Sí,,2.9,3100000005,mateo@example.com,Sandra Ramírez
+6,Valentina Gómez,11B,2024-04-01,Sí,,3.5,3100000006,valentina@example.com,César Gómez
+7,Sebastián López,9A,2024-04-01,No,Familiar fallecido,4.1,3100000007,sebastian@example.com,Laura López
+8,Mariana Díaz,10A,2024-04-01,Sí,,4.6,3100000008,mariana@example.com,Carlos Díaz
+9,Sofía Martínez,10A,2024-04-01,Sí,,3.4,3100000009,sofia@example.com,Juana Martínez
+10,Tomás Herrera,11A,2024-04-01,No,Enfermedad,3.1,3100000010,tomas@example.com,Claudia Herrera
+11,Isabella Castro,9B,2024-04-01,Sí,,3.0,3100000011,isabella@example.com,Nicolás Castro
+12,Santiago Morales,10A,2024-04-01,Sí,,4.2,3100000012,santiago@example.com,Daniela Morales
+13,Daniela Ruiz,10A,2024-04-01,No,Cita médica,4.8,3100000013,daniela@example.com,Pedro Ruiz
+14,Gabriel Silva,11B,2024-04-01,Sí,,2.7,3100000014,gabriel@example.com,Elena Silva
+15,Camila Torres,10B,2024-04-01,Sí,,4.0,3100000015,camila@example.com,Roberto Torres
+16,Juan Pablo Reyes,9A,2024-04-01,No,Sin justificación,3.6,3100000016,juan@example.com,Diana Reyes
+17,Manuela Vargas,11A,2024-04-01,Sí,,4.5,3100000017,manuela@example.com,Raúl Vargas
+18,Emilio Peña,9B,2024-04-01,No,Enfermedad,3.2,3100000018,emilio@example.com,Adriana Peña
+19,Sara Méndez,10A,2024-04-01,Sí,,4.4,3100000019,sara@example.com,Iván Méndez
+20,Felipe Navarro,10A,2024-04-01,Sí,,3.3,3100000020,felipe@example.com,Marcela Navarro
+21,Juan Carlos Roldan,11B,2025-05-03,Sí,,2.6,3146913810,juan@example.com,Carlos Díaz
+22,Custodia Heredia,9B,2025-04-17,Sí,,4.3,3183197857,custodia@example.com,Marta Rojas
+23,Wálter Zabaleta,11A,2025-05-08,No,Enfermedad,2.6,3139345092,wálter@example.com,Carlos Díaz
+24,Paloma Jove,11A,2025-04-27,Sí,,3.9,3197226012,paloma@example.com,Adriana Peña
+25,Ester Cortina,10B,2025-04-29,Sí,,3.6,3147338124,ester@example.com,Ana Pérez
+26,Alejandro Bustamante,9B,2025-04-18,No,Familiar fallecido,3.2,3138898923,alejandro@example.com,Nicolás Castro
+27,Manu Maza,9A,2025-04-20,Sí,,3.4,3158181396,manu@example.com,Daniela Morales
+28,Nazario Jerez,11A,2025-05-07,No,Enfermedad,4.3,3181971316,nazario@example.com,Ricardo Fernández
+29,Yago Castelló,10B,2025-04-19,Sí,,3.9,3194374605,yago@example.com,Marcela Navarro
+30,Teófila Merino,10A,2025-05-01,Sí,,4.3,3116150444,teófila@example.com,Carlos Díaz
+31,Imelda Patiño,10A,2025-04-26,Sí,,4.6,3123556182,imelda@example.com,Pedro Ruiz
+32,María Manuela Jódar,10A,2025-04-23,No,Familiar fallecido,2.9,3157683626,maría@example.com,Laura López
+33,Carmen Amor,11B,2025-05-03,No,Enfermedad,4.0,3132969840,carmen@example.com,Adriana Peña
+34,Sabina Llanos,11B,2025-05-07,Sí,,2.9,3160929647,sabina@example.com,Juana Martínez
+35,Sofía Gargallo,11B,2025-04-16,Sí,,4.2,3117507864,sofía@example.com,Carlos Díaz
+36,Otilia Barco,9A,2025-04-14,No,Sin justificación,3.2,3138317637,otilia@example.com,Iván Méndez
+37,Yaiza Rius,11B,2025-04-15,No,Cita médica,4.1,3163100814,yaiza@example.com,Roberto Torres
+38,Plinio Roma,9B,2025-04-29,No,Cita médica,3.1,3185345555,plinio@example.com,Adriana Peña
+39,Azahara Salgado,10A,2025-04-28,No,,3.5,3139436733,azahara@example.com,Sandra Ramírez
+40,Domingo Barón,11A,2025-04-22,No,Enfermedad,4.4,3124716857,domingo@example.com,Sandra Ramírez
+41,Úrsula Acuña,11B,2025-05-13,Sí,,4.5,3166661351,úrsula@example.com,Marcela Navarro
+42,Azucena Díaz,9A,2025-04-27,No,Sin justificación,4.0,3172820592,azucena@example.com,Raúl Vargas
+43,José María Bernat,10A,2025-04-21,Sí,,4.2,3125374874,josé@example.com,Adriana Peña
+44,Gregorio Tamayo,10A,2025-05-04,No,Enfermedad,3.2,3131227574,gregorio@example.com,Roberto Torres
+45,Américo Millán,9A,2025-04-14,No,,4.4,3178139880,américo@example.com,Ricardo Fernández
+46,María José Priego,11B,2025-04-27,No,,4.0,3130513739,maría@example.com,Daniela Morales
+47,Lázaro Portero,9B,2025-04-22,Sí,,4.0,3175579548,lázaro@example.com,Ana Pérez
+48,Eloísa Álamo,9A,2025-05-11,No,Familiar fallecido,3.1,3142329237,eloísa@example.com,Iván Méndez
+49,Guiomar Vizcaíno,9A,2025-04-14,Sí,,4.3,3119289546,guiomar@example.com,Adriana Peña
+50,Lola Casado,9B,2025-04-26,Sí,,4.1,3183793389,lola@example.com,César Gómez
+51,Juan Riba,10A,2025-05-10,No,Cita médica,4.8,3136998038,juan@example.com,Claudia Herrera
+52,Ildefonso Nogués,10B,2025-04-29,No,Sin justificación,4.7,3170597444,ildefonso@example.com,Ricardo Fernández
+53,Primitivo González,9B,2025-04-18,Sí,,2.7,3112823170,primitivo@example.com,Iván Méndez
+54,Enrique Luque,11A,2025-04-25,Sí,,4.0,3110965138,enrique@example.com,Marta Rojas
+55,Ester Valentín,11B,2025-04-19,Sí,,3.1,3114216175,ester@example.com,Nicolás Castro
+56,Filomena Muro,9A,2025-04-28,Sí,,3.2,3175151231,filomena@example.com,Laura López
+57,Pili Gisbert,11A,2025-05-04,Sí,,4.3,3186644106,pili@example.com,Iván Méndez
+58,Narcisa Feijoo,10B,2025-04-19,Sí,,4.5,3164634663,narcisa@example.com,Laura López
+59,Héctor Lago,9A,2025-04-25,Sí,,4.1,3157553014,héctor@example.com,Elena Silva
+60,Clímaco Luís,10B,2025-04-18,No,Enfermedad,4.2,3196728778,clímaco@example.com,Ricardo Fernández
+61,Amarilis Herrero,9A,2025-04-18,No,Familiar fallecido,4.5,3124665841,amarilis@example.com,Carlos Díaz
+62,Adolfo Tamayo,9B,2025-05-07,Sí,,3.8,3128814949,adolfo@example.com,Elena Silva
+63,Camilo Ros,9B,2025-04-20,No,Sin justificación,3.1,3120117988,camilo@example.com,Roberto Torres
+64,Anastasia Pera,11A,2025-05-03,Sí,,2.6,3182556484,anastasia@example.com,Ana Pérez
+65,Leocadio Lillo,9A,2025-04-29,Sí,,2.9,3175181648,leocadio@example.com,Diana Reyes
+66,Nélida Botella,9B,2025-04-17,No,Enfermedad,2.9,3110289289,nélida@example.com,Pedro Ruiz
+67,Azahar Quesada,10A,2025-04-16,No,Familiar fallecido,3.6,3184593961,azahar@example.com,Diana Reyes
+68,Amílcar Palmer,9B,2025-04-21,Sí,,3.2,3117849494,amílcar@example.com,Iván Méndez
+69,Mónica Hervia,11B,2025-05-03,Sí,,4.4,3117672593,mónica@example.com,Luis Torres
+70,Mohamed Roda,11A,2025-04-15,No,,4.8,3181286543,mohamed@example.com,César Gómez
+71,Eugenia Quiroga,9A,2025-05-11,Sí,,4.6,3119196777,eugenia@example.com,Marcela Navarro
+72,Graciana Pintor,9A,2025-04-19,Sí,,3.5,3186460539,graciana@example.com,Carlos Díaz
+73,Primitiva Quintana,11A,2025-05-06,Sí,,4.0,3166267415,primitiva@example.com,Iván Méndez
+74,Ciriaco Gracia,11A,2025-04-19,No,Familiar fallecido,3.0,3152169044,ciriaco@example.com,Carlos Díaz
+75,Severino Folch,10A,2025-04-21,No,Cita médica,4.2,3150264926,severino@example.com,Roberto Torres
+76,Calisto Quintanilla,10A,2025-04-28,Sí,,2.5,3193370583,calisto@example.com,Iván Méndez
+77,Úrsula Gargallo,9A,2025-04-24,Sí,,3.8,3177898694,úrsula@example.com,Juana Martínez
+78,Pepita Cabañas,9B,2025-05-02,No,Enfermedad,4.7,3159597086,pepita@example.com,Claudia Herrera
+79,Caridad Fuertes,9B,2025-04-30,No,,4.3,3192097999,caridad@example.com,Raúl Vargas
+80,Mercedes Álvaro,9A,2025-04-15,No,Enfermedad,4.8,3128024248,mercedes@example.com,Juana Martínez
+81,Damián Villalba,9A,2025-04-29,Sí,,4.4,3130863865,damián@example.com,Juana Martínez
+82,Pacífica Pelayo,10A,2025-04-21,Sí,,4.3,3137326368,pacífica@example.com,Juana Martínez
+83,Macaria Peña,11A,2025-04-15,No,Familiar fallecido,4.8,3116818112,macaria@example.com,Marta Rojas
+84,María Manuela Losada,11B,2025-05-01,No,Familiar fallecido,2.6,3154769200,maría@example.com,Sandra Ramírez
+85,Plácido Godoy,11B,2025-05-09,No,Cita médica,4.4,3184045292,plácido@example.com,Elena Silva
+86,Bernarda Francisco,11A,2025-05-07,Sí,,2.8,3130005727,bernarda@example.com,Adriana Peña
+87,Vidal Ramirez,9A,2025-05-03,No,,3.9,3167684996,vidal@example.com,Sandra Ramírez
+88,Esteban Manzano,9A,2025-04-20,No,Familiar fallecido,4.7,3115354599,esteban@example.com,Daniela Morales
+89,Bernardo Vega,9B,2025-05-06,Sí,,4.2,3157469942,bernardo@example.com,Adriana Peña
+90,Artemio Atienza,10B,2025-05-06,Sí,,4.8,3141774346,artemio@example.com,César Gómez
+91,Samanta Novoa,9B,2025-05-04,No,Enfermedad,2.9,3154585178,samanta@example.com,Elena Silva
+92,Toni Ordóñez,11B,2025-04-15,Sí,,3.2,3124508349,toni@example.com,Pedro Ruiz
+93,Aarón Perera,9A,2025-05-10,No,Cita médica,3.0,3171780854,aarón@example.com,Daniela Morales
+94,Lucía Alberdi,10A,2025-04-26,Sí,,3.1,3198588154,lucía@example.com,Laura López
+95,Modesta Segura,10B,2025-04-15,No,Familiar fallecido,4.7,3147463522,modesta@example.com,Daniela Morales
+96,Juanito Arias,11B,2025-04-24,No,,3.3,3113704481,juanito@example.com,Ricardo Fernández
+97,Martirio Madrigal,10A,2025-04-19,Sí,,4.0,3145630292,martirio@example.com,Luis Torres
+98,Juana Aliaga,9A,2025-05-12,No,Familiar fallecido,4.3,3152101056,juana@example.com,Elena Silva
+99,Laura Casanovas,11A,2025-04-14,Sí,,3.5,3187388337,laura@example.com,Laura López
+100,Luna Soler,10A,2025-04-27,Sí,,4.3,3110226999,luna@example.com,Raúl Vargas
+101,Efraín Pedrosa,11A,2025-05-07,Sí,,3.4,3119391725,efraín@example.com,Nicolás Castro
+102,Elpidio Castelló,11A,2025-04-14,No,Enfermedad,4.3,3150308572,elpidio@example.com,Raúl Vargas
+103,Chema Rosell,10A,2025-04-18,No,Familiar fallecido,3.5,3149682169,chema@example.com,Adriana Peña
+104,Maxi Salvà,9B,2025-05-03,Sí,,3.6,3160888017,maxi@example.com,César Gómez
+105,Cebrián Pozo,11A,2025-05-09,No,Sin justificación,3.9,3110054484,cebrián@example.com,Claudia Herrera
+106,Fabiola Heredia,10A,2025-04-14,Sí,,3.6,3187844239,fabiola@example.com,Marcela Navarro
+107,Diego Pizarro,11B,2025-05-08,No,Sin justificación,3.6,3138682516,diego@example.com,Raúl Vargas
+108,Edelmiro Medina,10B,2025-05-12,Sí,,4.1,3148089166,edelmiro@example.com,Raúl Vargas
+109,Estrella Rodriguez,11B,2025-04-18,No,Enfermedad,4.5,3141523529,estrella@example.com,Claudia Herrera
+110,Mónica Velázquez,9B,2025-05-04,Sí,,2.9,3116202700,mónica@example.com,Carlos Díaz
+111,Juan Antonio Estevez,10B,2025-04-17,Sí,,3.6,3194525678,juan@example.com,Iván Méndez
+112,Lucía Losa,9B,2025-05-06,No,Sin justificación,3.5,3129806690,lucía@example.com,Ana Pérez
+113,Reyes Benavent,9A,2025-04-14,No,Cita médica,2.9,3179519112,reyes@example.com,Roberto Torres
+114,Miguela Arnau,9A,2025-04-28,Sí,,4.8,3126288475,miguela@example.com,Roberto Torres
+115,Cipriano Peral,9B,2025-04-29,No,,5.0,3189920257,cipriano@example.com,Nicolás Castro
+116,Almudena Bou,10B,2025-04-19,No,,3.6,3131361812,almudena@example.com,Diana Reyes
+117,Valerio Lluch,10B,2025-04-18,No,Cita médica,4.6,3147220099,valerio@example.com,Raúl Vargas
+118,Carmelo Checa,10B,2025-05-12,Sí,,3.2,3120399639,carmelo@example.com,Claudia Herrera
+119,Amparo Tudela,9B,2025-04-23,No,Familiar fallecido,3.3,3182498004,amparo@example.com,Marta Rojas
+120,Raúl Roma,9B,2025-05-09,Sí,,3.1,3130509175,raúl@example.com,Laura López
+121,Juan Pablo Pizarro,9A,2025-05-08,No,Sin justificación,3.3,3172535301,juan@example.com,Elena Silva
+122,Maximiano Aller,9A,2025-04-20,Sí,,4.6,3162274692,maximiano@example.com,Iván Méndez
+123,Valentín Carretero,11B,2025-05-13,Sí,,4.6,3187267850,valentín@example.com,Pedro Ruiz
+124,Ana Belén Alegre,10B,2025-04-24,Sí,,4.9,3150079111,ana@example.com,Pedro Ruiz
+125,Octavio Fabra,10B,2025-04-23,Sí,,3.7,3146632757,octavio@example.com,Elena Silva
+126,Pepito Fabregat,10B,2025-04-27,Sí,,3.5,3199774697,pepito@example.com,Pedro Ruiz
+127,Jovita Alcaraz,11B,2025-04-17,Sí,,4.6,3127129912,jovita@example.com,Marcela Navarro
+128,Isidro Juliá,11A,2025-04-30,Sí,,4.8,3189442503,isidro@example.com,Iván Méndez
+129,Toni Seco,11B,2025-05-03,Sí,,2.7,3167527432,toni@example.com,Sandra Ramírez
+130,Domingo Casanovas,10B,2025-05-12,Sí,,2.6,3160882459,domingo@example.com,Nicolás Castro
+131,Clotilde Carretero,9B,2025-04-14,No,Familiar fallecido,3.3,3160885459,clotilde@example.com,Juana Martínez
+132,Lucho Fuentes,10B,2025-04-16,No,Enfermedad,3.7,3182399599,lucho@example.com,Luis Torres
+133,Catalina Cañas,10A,2025-04-20,Sí,,4.1,3197477029,catalina@example.com,Luis Torres
+134,Camilo Vilalta,9A,2025-05-13,Sí,,3.0,3112735359,camilo@example.com,Marcela Navarro
+135,Calixta Coello,9B,2025-05-06,Sí,,2.8,3199853245,calixta@example.com,Ricardo Fernández
+136,Febe Morcillo,11A,2025-05-06,Sí,,3.7,3144392446,febe@example.com,Daniela Morales
+137,Bernardita Suarez,9B,2025-04-19,Sí,,4.4,3131980274,bernardita@example.com,Claudia Herrera
+138,Cosme López,9A,2025-04-25,Sí,,4.8,3187282128,cosme@example.com,Pedro Ruiz
+139,Morena Diego,10B,2025-05-12,Sí,,2.7,3194187049,morena@example.com,Carlos Díaz
+140,Edmundo Godoy,9A,2025-04-25,No,,4.5,3185958181,edmundo@example.com,Luis Torres
+141,Alejandra Arenas,10A,2025-05-10,No,Familiar fallecido,2.7,3196911784,alejandra@example.com,Nicolás Castro
+142,Reyes Gámez,9A,2025-04-21,No,Sin justificación,2.8,3158612055,reyes@example.com,Roberto Torres
+143,Silvestre Bou,11B,2025-04-21,Sí,,3.6,3180027662,silvestre@example.com,Juana Martínez
+144,Pelayo Chico,11A,2025-04-19,No,Sin justificación,3.6,3189520597,pelayo@example.com,Juana Martínez
+145,Salomé Otero,10A,2025-05-08,Sí,,4.6,3121631697,salomé@example.com,Juana Martínez
+146,Rosalina Gallo,10B,2025-04-15,Sí,,4.4,3186483924,rosalina@example.com,Marcela Navarro
+147,Lupe Amo,11B,2025-05-06,No,Familiar fallecido,2.6,3153622663,lupe@example.com,César Gómez
+148,Sandra Quevedo,10B,2025-05-07,Sí,,3.4,3144675473,sandra@example.com,Nicolás Castro
+149,Paulino Hoyos,10A,2025-05-05,No,,2.5,3135643159,paulino@example.com,Marta Rojas
+150,María Peñalver,9B,2025-04-17,No,Sin justificación,3.9,3142255732,maría@example.com,Diana Reyes
+151,Clara Castrillo,11B,2025-05-04,No,Sin justificación,4.5,3122489409,clara@example.com,Claudia Herrera
+152,Emelina Palomar,9B,2025-04-23,No,Cita médica,3.3,3188055069,emelina@example.com,Daniela Morales
+153,Anabel Palmer,10B,2025-04-28,No,Sin justificación,5.0,3183871890,anabel@example.com,Nicolás Castro
+154,Pilar Barba,10A,2025-04-22,No,Familiar fallecido,3.3,3140942292,pilar@example.com,Ricardo Fernández
+155,Amelia Bas,11B,2025-04-29,Sí,,3.3,3181922443,amelia@example.com,César Gómez
+156,Galo Pellicer,9B,2025-04-18,Sí,,4.3,3147111151,galo@example.com,Iván Méndez
+157,Bárbara Mir,11A,2025-05-06,No,Enfermedad,4.6,3149761527,bárbara@example.com,Carlos Díaz
+158,Ale Colomer,10A,2025-05-02,Sí,,3.3,3181690398,ale@example.com,Sandra Ramírez
+159,Efraín Pina,10A,2025-05-07,Sí,,4.9,3184270583,efraín@example.com,Claudia Herrera
+160,Antonia Rovira,11B,2025-04-29,Sí,,4.1,3175884623,antonia@example.com,Ricardo Fernández
+161,Teodora Segovia,9A,2025-05-06,No,Sin justificación,3.7,3155728776,teodora@example.com,César Gómez
+162,Custodia Pujadas,9A,2025-04-21,No,Sin justificación,2.8,3118770247,custodia@example.com,Pedro Ruiz
+163,Lupe Valenciano,10B,2025-05-01,Sí,,3.9,3117195288,lupe@example.com,Sandra Ramírez
+164,Victor Manuel Cañizares,9B,2025-04-18,No,Enfermedad,5.0,3125898299,victor@example.com,Adriana Peña
+165,Sigfrido Varela,10B,2025-04-23,Sí,,4.4,3161053474,sigfrido@example.com,Roberto Torres
+166,Telmo Andreu,10B,2025-04-19,No,,5.0,3150987442,telmo@example.com,Iván Méndez
+167,Lourdes Álamo,11A,2025-05-11,Sí,,4.0,3123318904,lourdes@example.com,Laura López
+168,Felipe Asenjo,11B,2025-04-26,Sí,,3.2,3120896797,felipe@example.com,César Gómez
+169,Natividad Ramos,9B,2025-05-06,Sí,,3.9,3131009452,natividad@example.com,Ana Pérez
+170,Candelaria Robledo,10B,2025-05-02,No,,3.7,3114380847,candelaria@example.com,Carlos Díaz
+171,América Toro,10A,2025-05-10,No,Sin justificación,2.7,3141329612,américa@example.com,Juana Martínez
+172,Bienvenida Bas,11B,2025-04-25,Sí,,3.6,3183089925,bienvenida@example.com,Carlos Díaz
+173,Manola Bermúdez,11B,2025-05-09,Sí,,4.8,3129090631,manola@example.com,Marta Rojas
+174,Sabas Moll,9A,2025-05-12,Sí,,4.5,3189865458,sabas@example.com,Iván Méndez
+175,Manola Vives,10A,2025-04-29,No,Enfermedad,3.7,3150814428,manola@example.com,Pedro Ruiz
+176,Imelda Juan,10A,2025-04-25,No,Sin justificación,2.7,3115350023,imelda@example.com,Elena Silva
+177,Ana Belén Cerezo,11B,2025-04-17,No,,3.1,3122257687,ana@example.com,Carlos Díaz
+178,Chema Doménech,11B,2025-05-08,Sí,,5.0,3146173157,chema@example.com,Iván Méndez
+179,Eliseo Arrieta,9A,2025-05-13,Sí,,3.7,3197444123,eliseo@example.com,Roberto Torres
+180,Milagros Navarro,10A,2025-04-21,Sí,,5.0,3168503492,milagros@example.com,Diana Reyes
+181,Iván Gilabert,9A,2025-04-22,No,Familiar fallecido,3.5,3153091709,iván@example.com,Ricardo Fernández
+182,Belen Cifuentes,9B,2025-04-22,No,Sin justificación,4.2,3148683937,belen@example.com,Pedro Ruiz
+183,Paulina Lloret,11A,2025-04-18,Sí,,3.6,3152213778,paulina@example.com,Juana Martínez
+184,Aníbal Galán,10A,2025-05-13,Sí,,4.9,3164247457,aníbal@example.com,Raúl Vargas
+185,Renata Fábregas,9A,2025-05-11,No,Sin justificación,2.6,3179583757,renata@example.com,Daniela Morales
+186,Bernardita Alberola,11A,2025-04-21,No,Sin justificación,4.4,3137321124,bernardita@example.com,Juana Martínez
+187,Sergio Urrutia,11A,2025-05-13,Sí,,4.8,3168802946,sergio@example.com,Diana Reyes
+188,Yésica Marco,9A,2025-04-19,Sí,,4.9,3191721371,yésica@example.com,Carlos Díaz
+189,Efraín Mercader,11B,2025-05-06,Sí,,3.3,3111835355,efraín@example.com,Adriana Peña
+190,Heraclio Zamora,10B,2025-05-12,Sí,,3.1,3125228493,heraclio@example.com,Roberto Torres
+191,Perlita Garay,9A,2025-05-13,Sí,,3.7,3149172995,perlita@example.com,Raúl Vargas
+192,Celia Vilalta,11B,2025-04-24,No,Sin justificación,4.6,3173380266,celia@example.com,Carlos Díaz
+193,Carmen Carranza,10B,2025-04-30,Sí,,3.5,3190447099,carmen@example.com,Raúl Vargas
+194,Catalina Echeverría,11B,2025-05-09,Sí,,4.7,3147077298,catalina@example.com,Elena Silva
+195,Vanesa Cueto,10A,2025-04-21,No,Enfermedad,3.2,3150071487,vanesa@example.com,Iván Méndez
+196,Angelina Gras,11A,2025-05-11,No,Cita médica,3.6,3175007200,angelina@example.com,Daniela Morales
+197,Amelia Tormo,10A,2025-04-25,No,Sin justificación,4.8,3135320492,amelia@example.com,Carlos Díaz
+198,Charo Borja,11A,2025-04-19,No,Cita médica,4.6,3165133300,charo@example.com,Luis Torres
+199,Ale Ribes,10A,2025-04-28,No,Sin justificación,3.5,3199078806,ale@example.com,Sandra Ramírez
+200,Ileana Lago,10B,2025-04-26,Sí,,2.8,3189212676,ileana@example.com,Nicolás Castro
+201,Guiomar Llamas,9A,2025-04-25,No,Enfermedad,3.8,3171327848,guiomar@example.com,Ana Pérez
+202,Eva María Palomo,11B,2025-05-07,Sí,,3.5,3197883261,eva@example.com,Sandra Ramírez
+203,Jesús Calvo,9A,2025-05-09,No,Familiar fallecido,3.3,3163349308,jesús@example.com,Marta Rojas
+204,Berto Portero,10A,2025-04-18,No,Familiar fallecido,4.1,3175491202,berto@example.com,Adriana Peña
+205,Rebeca Paniagua,9A,2025-04-23,Sí,,3.1,3148571356,rebeca@example.com,Carlos Díaz
+206,Jose Francisco Toledo,11B,2025-05-10,Sí,,3.6,3123212812,jose@example.com,Ricardo Fernández
+207,Samu Borja,10B,2025-04-25,Sí,,4.2,3113885234,samu@example.com,Luis Torres
+208,Saturnino Anglada,10A,2025-04-20,Sí,,3.2,3160310319,saturnino@example.com,Elena Silva
+209,Eutimio Pazos,9B,2025-04-18,Sí,,3.8,3185957578,eutimio@example.com,César Gómez
+210,Etelvina Palacio,9B,2025-04-18,Sí,,2.7,3161344226,etelvina@example.com,Marcela Navarro
+211,Paz Gámez,11B,2025-04-26,Sí,,3.7,3188270025,paz@example.com,Sandra Ramírez
+212,Lorena Blanch,9B,2025-05-03,No,Familiar fallecido,3.6,3199501846,lorena@example.com,Ana Pérez
+213,Julie Peralta,10B,2025-04-28,No,,2.9,3169287967,julie@example.com,Daniela Morales
+214,Georgina Patiño,11A,2025-04-27,No,Sin justificación,4.2,3171315464,georgina@example.com,Claudia Herrera
+215,Jacobo Botella,9B,2025-04-25,No,Sin justificación,2.8,3161185849,jacobo@example.com,Iván Méndez
+216,Abilio Villalonga,10A,2025-05-05,No,Familiar fallecido,2.6,3198346110,abilio@example.com,Pedro Ruiz
+217,Paco Mora,10A,2025-05-10,Sí,,3.9,3116582607,paco@example.com,Marcela Navarro
+218,Juan Bautista Gras,11B,2025-05-12,No,Familiar fallecido,4.4,3140885967,juan@example.com,Marcela Navarro
+219,Ámbar Rios,10A,2025-04-15,Sí,,4.1,3193334601,ámbar@example.com,Juana Martínez
+220,Belen Ortiz,11B,2025-05-09,Sí,,4.1,3194216001,belen@example.com,Luis Torres
+221,Ale Velasco,10A,2025-04-27,No,Enfermedad,3.9,3127637794,ale@example.com,Marta Rojas
+222,Vasco Segura,10A,2025-05-01,No,Sin justificación,2.9,3127738187,vasco@example.com,Adriana Peña
+223,Ruy Roma,10A,2025-04-14,No,Cita médica,3.1,3174672520,ruy@example.com,Claudia Herrera
+224,Mario Arenas,11B,2025-04-16,No,Enfermedad,3.7,3120106509,mario@example.com,Sandra Ramírez
+225,Ainara Ferreras,9B,2025-04-29,No,,3.4,3162958901,ainara@example.com,Ana Pérez
+226,Anunciación Velázquez,10A,2025-04-27,Sí,,3.6,3145186708,anunciación@example.com,Iván Méndez
+227,Rosendo Caparrós,10B,2025-04-30,No,Enfermedad,4.2,3173280554,rosendo@example.com,Ana Pérez
+228,Nerea Cuéllar,11A,2025-05-08,No,,3.1,3118484847,nerea@example.com,Roberto Torres
+229,Américo Grau,11B,2025-04-22,No,Sin justificación,2.8,3116086345,américo@example.com,Luis Torres
+230,Carmina Valle,10A,2025-05-11,No,Enfermedad,2.7,3182148284,carmina@example.com,Sandra Ramírez
+231,Nereida Arana,10B,2025-04-14,No,Familiar fallecido,4.2,3182503409,nereida@example.com,Elena Silva
+232,Salomé Castillo,11A,2025-05-01,Sí,,4.7,3197902129,salomé@example.com,Ricardo Fernández
+233,Marisela Pozuelo,10B,2025-04-16,No,Familiar fallecido,2.6,3159731689,marisela@example.com,Laura López
+234,Eugenio Cervera,10B,2025-04-24,No,Cita médica,4.6,3123335151,eugenio@example.com,Daniela Morales
+235,Camilo Ferrer,11A,2025-05-03,No,Enfermedad,3.5,3135475673,camilo@example.com,Ricardo Fernández
+236,Amaya Peña,10B,2025-04-22,Sí,,4.2,3196128115,amaya@example.com,Marcela Navarro
+237,Carlota Anaya,9A,2025-05-13,Sí,,4.5,3142691263,carlota@example.com,Sandra Ramírez
+238,Camilo Colom,11A,2025-05-07,Sí,,2.7,3184384510,camilo@example.com,Laura López
+239,Teo Ferrández,11A,2025-05-13,Sí,,4.5,3141272553,teo@example.com,Nicolás Castro
+240,Osvaldo Sáenz,9B,2025-05-04,Sí,,3.2,3129419691,osvaldo@example.com,Sandra Ramírez
+241,Eva Duran,11A,2025-04-22,No,Cita médica,2.8,3113460153,eva@example.com,Sandra Ramírez
+242,Guiomar Díaz,9A,2025-04-19,No,Cita médica,4.0,3112118101,guiomar@example.com,César Gómez
+243,Reynaldo Marí,10A,2025-05-13,Sí,,2.8,3166500369,reynaldo@example.com,Raúl Vargas
+244,Chita Real,9A,2025-04-21,Sí,,3.7,3158592048,chita@example.com,Raúl Vargas
+245,Jorge Escamilla,11A,2025-04-23,Sí,,3.6,3139735904,jorge@example.com,Marcela Navarro
+246,Azeneth Santamaria,9A,2025-05-13,No,Sin justificación,4.1,3114180968,azeneth@example.com,Luis Torres
+247,Sabas Puente,10B,2025-05-13,No,Sin justificación,4.2,3175802771,sabas@example.com,Roberto Torres
+248,Guadalupe Pomares,9A,2025-05-09,Sí,,3.3,3129909029,guadalupe@example.com,Marta Rojas
+249,Esther Amat,9B,2025-05-05,No,,4.1,3183599154,esther@example.com,Nicolás Castro
+250,Armando Amaya,10B,2025-05-12,No,Sin justificación,3.8,3167740376,armando@example.com,Ricardo Fernández
+251,Jenaro Viana,11B,2025-04-19,Sí,,4.6,3197364555,jenaro@example.com,Adriana Peña
+252,Paola Bilbao,11B,2025-05-10,Sí,,3.6,3140667888,paola@example.com,Elena Silva
+253,Teodosio Bayón,10A,2025-05-12,No,Sin justificación,3.5,3122762205,teodosio@example.com,Nicolás Castro
+254,Fabiola Cal,10B,2025-05-12,No,Familiar fallecido,3.4,3130486849,fabiola@example.com,Diana Reyes
+255,Custodia Batalla,9A,2025-04-25,Sí,,4.6,3122513132,custodia@example.com,Elena Silva
+256,Margarita Marco,9A,2025-05-13,No,Cita médica,3.9,3188714010,margarita@example.com,Adriana Peña
+257,Odalys Cerezo,11A,2025-04-20,No,Enfermedad,3.5,3199300492,odalys@example.com,Elena Silva
+258,Blanca Taboada,11B,2025-05-08,Sí,,4.9,3190585678,blanca@example.com,Claudia Herrera
+259,Lina Piquer,10A,2025-04-23,Sí,,3.9,3138553319,lina@example.com,Sandra Ramírez
+260,Alicia Criado,11B,2025-04-21,No,Cita médica,4.6,3156991504,alicia@example.com,Adriana Peña
+261,Graciano Uribe,10A,2025-05-06,Sí,,4.4,3187054398,graciano@example.com,Carlos Díaz
+262,Alex Rivas,10B,2025-05-04,Sí,,4.0,3198292612,alex@example.com,Juana Martínez
+263,Leonardo Bustamante,9A,2025-04-19,Sí,,3.2,3151471222,leonardo@example.com,Nicolás Castro
+264,Marc Cerezo,10A,2025-04-23,Sí,,3.0,3129226889,marc@example.com,Iván Méndez
+265,Antonia Bernal,11B,2025-05-13,No,Enfermedad,2.9,3194982908,antonia@example.com,Ana Pérez
+266,Perlita Uribe,9A,2025-05-03,Sí,,3.4,3170887307,perlita@example.com,Nicolás Castro
+267,Fito Pinedo,9B,2025-04-17,No,Familiar fallecido,4.3,3186181117,fito@example.com,Marcela Navarro
+268,Filomena Tamayo,9A,2025-04-21,Sí,,2.9,3192924837,filomena@example.com,Luis Torres
+269,Marcia Alcalá,11B,2025-04-18,Sí,,3.2,3198843907,marcia@example.com,Elena Silva
+270,Francisco Jose Barranco,10B,2025-05-03,No,Sin justificación,3.2,3178765957,francisco@example.com,Ricardo Fernández
+271,Raimundo Rodriguez,10A,2025-05-11,No,Enfermedad,3.2,3189609131,raimundo@example.com,Diana Reyes
+272,Paulino Manzanares,11A,2025-04-28,No,Enfermedad,3.1,3190440034,paulino@example.com,Luis Torres
+273,Caridad Doménech,9A,2025-04-30,Sí,,3.3,3138351344,caridad@example.com,Sandra Ramírez
+274,María Ángeles Gallart,10A,2025-04-16,No,Familiar fallecido,2.8,3176757928,maría@example.com,Elena Silva
+275,Buenaventura Luz,9B,2025-04-24,Sí,,3.5,3140884937,buenaventura@example.com,Raúl Vargas
+276,Lucía Carrera,11A,2025-04-20,No,Enfermedad,3.5,3115677713,lucía@example.com,Elena Silva
+277,Brígida Barrena,9A,2025-04-16,No,Enfermedad,4.7,3187277086,brígida@example.com,Elena Silva
+278,Evangelina Donaire,11A,2025-05-02,No,Sin justificación,3.2,3164362516,evangelina@example.com,Ana Pérez
+279,Marcio Carlos,10A,2025-04-15,Sí,,4.5,3192963368,marcio@example.com,Roberto Torres
+280,Amanda Lamas,11B,2025-04-28,No,Enfermedad,3.6,3124208709,amanda@example.com,Carlos Díaz
+281,Viviana Sierra,10B,2025-04-24,No,,2.7,3151644346,viviana@example.com,Nicolás Castro
+282,Isidoro Jurado,9B,2025-05-13,No,Cita médica,2.7,3194989976,isidoro@example.com,Ricardo Fernández
+283,Victor Manuel Godoy,11A,2025-05-06,Sí,,4.8,3156892354,victor@example.com,Daniela Morales
+284,Pablo Puente,11B,2025-04-14,Sí,,3.1,3129655410,pablo@example.com,Juana Martínez
+285,Georgina Roda,9B,2025-04-21,Sí,,4.0,3197980930,georgina@example.com,Marta Rojas
+286,Reyna Tomé,9B,2025-05-06,No,Sin justificación,4.4,3187774890,reyna@example.com,Roberto Torres
+287,Juan Carlos Saez,11B,2025-05-05,No,Familiar fallecido,2.9,3119165226,juan@example.com,Diana Reyes
+288,Teodosio Navas,10B,2025-04-21,No,Familiar fallecido,4.0,3157236885,teodosio@example.com,Raúl Vargas
+289,Anunciación Arnal,9A,2025-05-06,No,Sin justificación,3.6,3117635653,anunciación@example.com,Daniela Morales
+290,Mónica Pallarès,10A,2025-04-16,Sí,,4.1,3122119391,mónica@example.com,Marcela Navarro
+291,Cecilia Escribano,11A,2025-05-13,No,Sin justificación,4.0,3115505975,cecilia@example.com,Roberto Torres
+292,Adora Dominguez,11A,2025-05-10,Sí,,3.3,3173837847,adora@example.com,Raúl Vargas
+293,Sergio Prado,9B,2025-05-05,Sí,,3.6,3156095437,sergio@example.com,Marta Rojas
+294,Goyo Santiago,11A,2025-04-25,Sí,,2.6,3168754920,goyo@example.com,Roberto Torres
+295,Ariel Bou,11A,2025-05-06,Sí,,3.4,3147969333,ariel@example.com,Pedro Ruiz
+296,Julie Talavera,10B,2025-05-08,No,,2.6,3194676162,julie@example.com,Nicolás Castro
+297,Rico Frías,9A,2025-04-20,No,Enfermedad,3.9,3161883769,rico@example.com,Claudia Herrera
+298,Lázaro Pla,10A,2025-04-17,Sí,,3.3,3188213973,lázaro@example.com,Sandra Ramírez
+299,Selena Catalá,10A,2025-04-26,No,Sin justificación,2.8,3121370793,selena@example.com,Claudia Herrera
+300,Julia Batalla,11A,2025-05-07,No,Familiar fallecido,4.5,3199941500,julia@example.com,Raúl Vargas
