@@ -7,6 +7,8 @@ import pandas as pd
 import os
 from pathlib import Path
 import tempfile
+from antlr4.tree.Trees import Trees
+import graphviz
 
 class AsistenciaInterpreter(AsistenciaVisitor):
     def __init__(self):
@@ -90,7 +92,27 @@ class AsistenciaInterpreter(AsistenciaVisitor):
         self.filters = []
         self.aggregates = []
 
-def ejecutar_script(path):
+def generar_arbol_sintactico(tree, parser, output_file="arbol_sintactico"):
+    dot = graphviz.Digraph()
+
+    def agregar_nodos(node, parent=None):
+        node_id = str(id(node))
+        if hasattr(node, 'getRuleIndex'):
+            rule_index = node.getRuleIndex()
+            label = parser.ruleNames[rule_index] if rule_index < len(parser.ruleNames) else f"rule_{rule_index}"
+        else:
+            label = node.getText()
+        dot.node(node_id, label)
+        if parent:
+            dot.edge(parent, node_id)
+        for i in range(node.getChildCount()):
+            agregar_nodos(node.getChild(i), node_id)
+
+    agregar_nodos(tree)
+    dot.render(output_file, format='png', cleanup=True)
+    print(f"[INFO] Árbol visual guardado como: {output_file}.png")
+
+def ejecutar_script(path, mostrar_arbol=False, numero_script=None):
     print(f"\n[INFO] Ejecutando script: {path}")
     input_stream = FileStream(path, encoding='utf-8')
     lexer = AsistenciaLexer(input_stream)
@@ -99,16 +121,22 @@ def ejecutar_script(path):
     tree = parser.program()
     visitor = AsistenciaInterpreter()
     visitor.visit(tree)
+
+    if mostrar_arbol:
+        output_dir = Path(__file__).parent / "arboles"
+        output_dir.mkdir(exist_ok=True)
+        nombre_archivo = output_dir / (f"arbol_script_{numero_script:02d}" if numero_script else "arbol_sintactico")
+        generar_arbol_sintactico(tree, parser, str(nombre_archivo))
+
     input("\nPresione Enter para continuar...")
 
 def extraer_scripts(script_path):
-    """Extrae los 40 scripts individuales del archivo consolidado"""
     with open(script_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
     script_blocks = []
     current_script = []
-    
+
     for line in content.split('\n'):
         if line.startswith('# Script'):
             if current_script:
@@ -122,7 +150,6 @@ def extraer_scripts(script_path):
     return script_blocks
 
 def mostrar_menu_scripts(scripts):
-    """Muestra un menú con los 40 scripts disponibles"""
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\n" + "="*60)
@@ -138,82 +165,109 @@ def mostrar_menu_scripts(scripts):
             if i < 30:
                 input("Presione Enter para ver más scripts...")
                 os.system('cls' if os.name == 'nt' else 'clear')
-        
+
         print("\n0. Volver al menú principal")
         print("="*60)
-        
+
         try:
-            opcion = input("\nSeleccione un script (1-40) o 0 para volver: ")
-            if opcion == "0":
-                return
+            opcion = input("\nSeleccione un script (1-40) o 0 para volver: ").strip()
+            
+            # Si el usuario presiona Enter sin introducir nada
+            if not opcion:
+                print("\n[ERROR] Debe ingresar un número (0-40)")
+                input("Presione Enter para continuar...")
+                continue
+                
+            # Verificar si la entrada es un número
+            if not opcion.isdigit():
+                print("\n[ERROR] Ingrese un número válido (0-40)")
+                input("Presione Enter para continuar...")
+                continue
+                
+            # Convertir a entero después de validar
             opcion = int(opcion)
-            if 1 <= opcion <= 40:
+            
+            if opcion == 0:
+                return
+            elif 1 <= opcion <= len(scripts):
                 with tempfile.NamedTemporaryFile(mode='w+', suffix='.dsl', delete=False) as temp:
                     temp.write(scripts[opcion-1])
                     temp_path = temp.name
-                
-                ejecutar_script(temp_path)
+                ejecutar_script(temp_path, mostrar_arbol=True, numero_script=opcion)
                 os.unlink(temp_path)
             else:
-                print("\n[ERROR] El número debe estar entre 1 y 40")
+                print(f"\n[ERROR] El número debe estar entre 1 y {len(scripts)}")
                 input("Presione Enter para continuar...")
-        except ValueError:
-            print("\n[ERROR] Ingrese un número válido")
+        except Exception as e:
+            print(f"\n[ERROR] Error inesperado: {e}")
             input("Presione Enter para continuar...")
 
 def mostrar_menu_principal():
     base_dir = Path(__file__).parent
     script_path = base_dir / "script.dsl"
     csv_path = base_dir / "asistencia_completa.csv"
-    
+
     if not script_path.exists():
         print(f"[ERROR] No se encontró script.dsl en {base_dir}")
         return
-    
+
     scripts = extraer_scripts(script_path)
     if not scripts:
         print("[ERROR] No se pudieron extraer scripts del archivo")
         return
-    
+
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print(" SISTEMA DE ANÁLISIS DE ASISTENCIA ".center(50))
-        print("="*50)
+        print("=" * 50)
         print("\n1. Seleccionar script (1-40)")
         print("2. Ver archivo CSV completo")
         print("3. Ver lista completa de scripts")
         print("0. Salir")
-        print("="*50)
-        
+        print("=" * 50)
+
         try:
-            opcion = input("\nSeleccione una opción: ")
-            if opcion == "0":
+            opcion = input("\nSeleccione una opción: ").strip()
+
+            if not opcion.isdigit():
+                raise ValueError("Debe ingresar un número (0-3).")
+
+            opcion = int(opcion)
+
+            if opcion == 0:
                 break
-            elif opcion == "1":
+            elif opcion == 1:
                 mostrar_menu_scripts(scripts)
-            elif opcion == "2":
+            elif opcion == 2:
                 if csv_path.exists():
                     df = pd.read_csv(csv_path)
                     print(f"\nPrimeras 10 filas del CSV:\n{df.head(10)}")
                 else:
-                    print(f"\n[ERROR] No se encontró {csv_path}")
+                    print(f"\n[ERROR] No se encontró el archivo CSV en: {csv_path}")
                 input("\nPresione Enter para continuar...")
-            elif opcion == "3":
+            elif opcion == 3:
                 print("\nLISTA COMPLETA DE SCRIPTS DISPONIBLES:")
                 for i, script in enumerate(scripts, 1):
                     first_line = script.split('\n')[0]
                     print(f"{i:2d}. {first_line}")
                 input("\nPresione Enter para continuar...")
             else:
-                print("\nOpción no válida")
+                print("\n[ERROR] Opción fuera de rango. Debe ser entre 0 y 3.")
                 input("Presione Enter para continuar...")
+
+        except ValueError as ve:
+            print(f"\n[ERROR] {ve}")
+            input("Presione Enter para continuar...")
         except Exception as e:
-            print(f"\n[ERROR] {e}")
+            print(f"\n[ERROR inesperado] {e}")
             input("Presione Enter para continuar...")
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        ejecutar_script(sys.argv[1])
-    else:
-        mostrar_menu_principal()
+    try:
+        if len(sys.argv) > 1:
+            ejecutar_script(sys.argv[1], mostrar_arbol=True)
+        else:
+            mostrar_menu_principal()
+    except Exception as e:
+        print(f"\n[ERROR fatal] {e}")
