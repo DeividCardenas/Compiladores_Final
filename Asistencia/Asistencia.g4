@@ -1,13 +1,9 @@
 grammar Asistencia;
 
-program: instruction+;
+program: (scriptComment | instruction)* EOF;
 
-instruction
-    : loadStmt
-    | filterStmt
-    | aggregateStmt
-    | printStmt
-    ;
+scriptComment: SCRIPT_COMMENT;
+instruction: loadStmt | filterStmt | aggregateStmt | printStmt;
 
 loadStmt: 'load' STRING ';';
 filterStmt: 'filter' filterExpr ';';
@@ -18,6 +14,7 @@ printStmt: 'print' ';';
 
 value: STRING | NUMBER;
 
+SCRIPT_COMMENT: '# Script' [0-9]+ ':' ~[\r\n]* -> skip;
 STRING: '"' (~["\r\n])* '"';
 NUMBER: [0-9]+ ('.' [0-9]+)?;
 OPERATOR: '>=' | '<=' | '>' | '<' | '==' | '!=';

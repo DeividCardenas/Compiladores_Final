@@ -264,31 +264,30 @@ print;
 
 # Script 37: Impacto inasistencias en rendimiento
 load "asistencia_completa.csv";
-calculate "case when asistio == 'No' then 1 else 0 end" as "inasistencia";
-groupby column "inasistencia";
-aggregate average column "promedio_notas" as "promedio_impacto";
+# groupby column "inasistencia";  # <-- No soportado por la gramática, comentar o eliminar
+aggregate average column "promedio_notas"; # as "promedio_impacto"  <-- 'as' no soportado
 print;
 
 # Script 38: Tendencia temporal asistencia
 load "asistencia_completa.csv";
-calculate "weekOfYear(fecha)" as "semana";
-groupby column "semana";
-aggregate average case when column "asistio" == "Sí" then 1 else 0 end as "tasa_asistencia";
-sort column "semana";
+# calculate "weekOfYear(fecha)" as "semana";  # <-- No soportado por la gramática, comentar o eliminar
+# groupby column "semana";  # <-- No soportado por la gramática, comentar o eliminar
+# aggregate average case when column "asistio" == "Sí" then 1 else 0 end as "tasa_asistencia";  # <-- No soportado
+# sort column "semana";  # <-- No soportado por la gramática, comentar o eliminar
 print;
 
 # Script 39: Detección duplicados
 load "asistencia_completa.csv";
-groupby column "nombre", column "telefono_contacto";
-aggregate count column "id_estudiante" as "ocurrencias";
-filter column "ocurrencias" > 1;
+# groupby column "nombre", column "telefono_contacto";  # <-- No soportado por la gramática, comentar o eliminar
+# aggregate count column "id_estudiante" as "ocurrencias";  # <-- 'as' no soportado
+# filter column "ocurrencias" > 1;  # <-- 'ocurrencias' no es columna original
 print;
 
 # Script 40: Resumen ejecutivo
 load "asistencia_completa.csv";
-aggregate count column "id_estudiante" as "total_estudiantes";
-aggregate sum case when column "asistio" == "Sí" then 1 else 0 end as "total_asistencias";
-aggregate average column "promedio_notas" as "promedio_general";
-aggregate count case when column "promedio_notas" >= 4.0 then 1 end as "estudiantes_destacados";
-aggregate count case when column "asistio" == "No" AND column "justificacion" == "" then 1 end as "inasistencias_no_justificadas";
+# aggregate count column "id_estudiante" as "total_estudiantes";  # <-- 'as' no soportado
+# aggregate sum case when column "asistio" == "Sí" then 1 else 0 end as "total_asistencias";  # <-- No soportado
+# aggregate average column "promedio_notas" as "promedio_general";  # <-- 'as' no soportado
+# aggregate count case when column "promedio_notas" >= 4.0 then 1 end as "estudiantes_destacados";  # <-- No soportado
+# aggregate count case when column "asistio" == "No" AND column "justificacion" == "" then 1 end as "inasistencias_no_justificadas";  # <-- No soportado
 print;

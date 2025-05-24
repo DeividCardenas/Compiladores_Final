@@ -9,6 +9,7 @@ from pathlib import Path
 import tempfile
 from antlr4.tree.Trees import Trees
 import graphviz
+from AsistenciaInterpreter import AsistenciaInterpreter
 
 class AsistenciaInterpreter(AsistenciaVisitor):
     def __init__(self):
@@ -93,6 +94,12 @@ class AsistenciaInterpreter(AsistenciaVisitor):
         self.aggregates = []
 
 def generar_arbol_sintactico(tree, parser, output_file="arbol_sintactico"):
+    # Cambia la ruta de salida para guardar en la carpeta 'arboles'
+    base_dir = Path(__file__).parent
+    arboles_dir = base_dir / "arboles"
+    arboles_dir.mkdir(exist_ok=True)
+    output_path = arboles_dir / output_file
+
     dot = graphviz.Digraph()
 
     def agregar_nodos(node, parent=None):
@@ -109,40 +116,56 @@ def generar_arbol_sintactico(tree, parser, output_file="arbol_sintactico"):
             agregar_nodos(node.getChild(i), node_id)
 
     agregar_nodos(tree)
-    dot.render(output_file, format='png', cleanup=True)
-    print(f"[INFO] Árbol visual guardado como: {output_file}.png")
+    dot.render(str(output_path), format='png', cleanup=True)
+    print(f"[INFO] Árbol visual guardado como: {output_path}.png")
 
 def ejecutar_script(path, mostrar_arbol=False, numero_script=None):
-    print(f"\n[INFO] Ejecutando script: {path}")
-    input_stream = FileStream(path, encoding='utf-8')
-    lexer = AsistenciaLexer(input_stream)
-    stream = CommonTokenStream(lexer)
-    parser = AsistenciaParser(stream)
-    tree = parser.program()
-    visitor = AsistenciaInterpreter()
-    visitor.visit(tree)
-
-    if mostrar_arbol:
-        output_dir = Path(__file__).parent / "arboles"
-        output_dir.mkdir(exist_ok=True)
-        nombre_archivo = output_dir / (f"arbol_script_{numero_script:02d}" if numero_script else "arbol_sintactico")
-        generar_arbol_sintactico(tree, parser, str(nombre_archivo))
-
-    input("\nPresione Enter para continuar...")
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Filtrar líneas de comentario
+        content = '\n'.join(line for line in content.split('\n') 
+                  if not line.strip().startswith('#'))
+        
+        input_stream = InputStream(content)
+        lexer = AsistenciaLexer(input_stream)
+        stream = CommonTokenStream(lexer)
+        parser = AsistenciaParser(stream)
+        tree = parser.program()
+        AsistenciaInterpreter().visit(tree)
+        
+        if mostrar_arbol:
+            generar_arbol_sintactico(tree, parser, f"arbol_script_{numero_script}")
+            
+    except Exception as e:
+        print(f"\n[ERROR] En script {numero_script}: {str(e)}")
+    finally:
+        input("\nPresione Enter para continuar...")
 
 def extraer_scripts(script_path):
-    with open(script_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
+    encodings = ['utf-8-sig', 'utf-8', 'latin-1']
+    for encoding in encodings:
+        try:
+            with open(script_path, 'r', encoding=encoding) as f:
+                content = f.read()
+                break
+        except UnicodeDecodeError:
+            continue
+    else:
+        raise ValueError("No se pudo leer el archivo con los encodings probados")
+
     script_blocks = []
     current_script = []
-
+    
     for line in content.split('\n'):
-        if line.startswith('# Script'):
+        stripped = line.strip()
+        if stripped.startswith('# Script'):
             if current_script:
                 script_blocks.append('\n'.join(current_script))
                 current_script = []
-        current_script.append(line)
+        if not stripped.startswith('#'):  # Ignorar líneas de comentario
+            current_script.append(line)
     
     if current_script:
         script_blocks.append('\n'.join(current_script))
@@ -153,53 +176,47 @@ def mostrar_menu_scripts(scripts):
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\n" + "="*60)
-        print(" SELECCIÓN DE SCRIPTS - ELIJA UNO DE LOS 40 DISPONIBLES ".center(60))
+        print(" SELECCIÓN DE SCRIPTS ".center(60))
+        print(f" Disponibles: {len(scripts)} scripts ".center(60))
         print("="*60)
         
-        for i in range(0, 40, 10):
-            for j in range(1, 11):
-                idx = i + j
-                if idx <= len(scripts):
-                    print(f"{idx:2d}. Script {idx}")
-            print("-"*60)
-            if i < 30:
-                input("Presione Enter para ver más scripts...")
-                os.system('cls' if os.name == 'nt' else 'clear')
+        for i, script in enumerate(scripts, 1):
+            # Extraer primera línea no comentada como descripción
+            description = next((line.strip() for line in script.split('\n') 
+                             if line.strip() and not line.strip().startswith('#')), 
+                            f"Script {i}")
+            print(f"{i:2d}. {description[:50]}")  # Mostrar primeros 50 caracteres
 
         print("\n0. Volver al menú principal")
         print("="*60)
 
         try:
-            opcion = input("\nSeleccione un script (1-40) o 0 para volver: ").strip()
+            opcion = input("\nSeleccione un script (1-{}) o 0 para volver: ".format(len(scripts))).strip()
             
-            # Si el usuario presiona Enter sin introducir nada
-            if not opcion:
-                print("\n[ERROR] Debe ingresar un número (0-40)")
-                input("Presione Enter para continuar...")
-                continue
+            if not opcion or not opcion.isdigit():
+                raise ValueError("Debe ingresar un número válido")
                 
-            # Verificar si la entrada es un número
-            if not opcion.isdigit():
-                print("\n[ERROR] Ingrese un número válido (0-40)")
-                input("Presione Enter para continuar...")
-                continue
-                
-            # Convertir a entero después de validar
             opcion = int(opcion)
             
             if opcion == 0:
                 return
             elif 1 <= opcion <= len(scripts):
-                with tempfile.NamedTemporaryFile(mode='w+', suffix='.dsl', delete=False) as temp:
-                    temp.write(scripts[opcion-1])
+                # Preprocesar script: eliminar líneas que comienzan con #
+                clean_script = '\n'.join(line for line in scripts[opcion-1].split('\n') 
+                              if not line.strip().startswith('#'))
+                
+                with tempfile.NamedTemporaryFile(mode='w+', suffix='.dsl', 
+                                              encoding='utf-8', delete=False) as temp:
+                    temp.write(clean_script)
                     temp_path = temp.name
+                
                 ejecutar_script(temp_path, mostrar_arbol=True, numero_script=opcion)
                 os.unlink(temp_path)
             else:
-                print(f"\n[ERROR] El número debe estar entre 1 y {len(scripts)}")
-                input("Presione Enter para continuar...")
+                raise ValueError(f"Número fuera de rango (1-{len(scripts)})")
+                
         except Exception as e:
-            print(f"\n[ERROR] Error inesperado: {e}")
+            print(f"\n[ERROR] {str(e)}")
             input("Presione Enter para continuar...")
 
 def mostrar_menu_principal():

@@ -17,6 +17,15 @@ class AsistenciaListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by AsistenciaParser#scriptComment.
+    def enterScriptComment(self, ctx:AsistenciaParser.ScriptCommentContext):
+        pass
+
+    # Exit a parse tree produced by AsistenciaParser#scriptComment.
+    def exitScriptComment(self, ctx:AsistenciaParser.ScriptCommentContext):
+        pass
+
+
     # Enter a parse tree produced by AsistenciaParser#instruction.
     def enterInstruction(self, ctx:AsistenciaParser.InstructionContext):
         pass

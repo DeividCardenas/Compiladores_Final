@@ -52,7 +52,10 @@ class AsistenciaVisitor(ParseTreeVisitor):
     # Visit a parse tree produced by AsistenciaParser#value.
     def visitValue(self, ctx:AsistenciaParser.ValueContext):
         return self.visitChildren(ctx)
-
+    
+    def visitScriptComment(self, ctx):
+        # Ignorar los comentarios de script
+        return None
 
 
 del AsistenciaParser
