@@ -142,7 +142,7 @@ python generar_datos.py
 ```
 7. Ejecutamos el programa principal: 
 ```
-pip install pandas graphviz faker
+python main.py
 ```
 
 ## Autores
