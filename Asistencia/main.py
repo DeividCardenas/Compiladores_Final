@@ -1,147 +1,84 @@
 import sys
+import os
 from antlr4 import *
 from AsistenciaLexer import AsistenciaLexer
 from AsistenciaParser import AsistenciaParser
 from AsistenciaVisitor import AsistenciaVisitor
 import pandas as pd
-import os
 from pathlib import Path
 import tempfile
 from antlr4.tree.Trees import Trees
 import graphviz
 from AsistenciaInterpreter import AsistenciaInterpreter
 
-class AsistenciaInterpreter(AsistenciaVisitor):
-    def __init__(self):
-        self.data = None
-        self.filters = []
-        self.aggregates = []
+def mostrar_analisis_lexico(path):
+    print("\n1️⃣ Análisis Léxico (Tokens generados):")
+    input_stream = FileStream(path, encoding='utf-8')
+    lexer = AsistenciaLexer(input_stream)
+    tokens = []
+    token = lexer.nextToken()
+    while token.type != Token.EOF:
+        tokens.append(f"[{lexer.symbolicNames[token.type] if token.type < len(lexer.symbolicNames) and lexer.symbolicNames[token.type] else token.text}]")
+        token = lexer.nextToken()
+    print(" ".join(tokens))
+    print("")
 
-    def visitProgram(self, ctx):
-        for instr in ctx.instruction():
-            self.visit(instr)
-
-    def visitLoadStmt(self, ctx):
-        filename = ctx.STRING().getText().strip('"')
-        base_dir = Path(__file__).parent
-        csv_path = base_dir / filename
-        
-        try:
-            self.data = pd.read_csv(csv_path)
-            print(f"[INFO] Archivo CSV cargado: {csv_path}")
-        except FileNotFoundError:
-            print(f"[ERROR] No se encontró el archivo: {csv_path}")
-            print(f"[INFO] Directorio actual: {base_dir}")
-            print(f"[INFO] Archivos disponibles: {os.listdir(base_dir)}")
-
-    def visitFilterStmt(self, ctx):
-        expr = ""
-        for child in ctx.filterExpr().children:
-            text = child.getText()
-            if text == "column":
-                continue
-            elif text in ["AND", "OR"]:
-                expr += f" {text.lower()} "
-            elif hasattr(child, "STRING"):
-                col = child.STRING().getText().strip('"')
-                op = child.OPERATOR().getText()
-                val_token = child.value().getText()
-                try:
-                    val = float(val_token)
-                except ValueError:
-                    if val_token.startswith('"') and val_token.endswith('"'):
-                        val_token = val_token[1:-1]
-                    val = f'"{val_token}"'
-                expr += f"(`{col}` {op} {val})"
-        if expr:
-            self.filters.append(expr)
-
-    def visitAggregateStmt(self, ctx):
-        op = ctx.AGG_OP().getText().lower()
-        col = ctx.STRING().getText().strip('"')
-        self.aggregates.append((op, col))
-
-    def visitPrintStmt(self, ctx):
-        if self.data is None:
-            print("[ERROR] No se ha cargado un archivo CSV.")
-            return
-
-        df = self.data.copy()
-        if self.filters:
-            combined_filter = " & ".join(self.filters)
-            try:
-                df = df.query(combined_filter)
-                print(f"[INFO] Filtro aplicado: {combined_filter}")
-            except Exception as e:
-                print(f"[ERROR] Filtro inválido: {combined_filter}")
-                print(e)
-                return
-
-        for op, col in self.aggregates:
-            try:
-                if op == 'count':
-                    result = df[col].count()
-                elif op == 'sum':
-                    result = df[col].sum()
-                elif op == 'average':
-                    result = df[col].mean()
-                print(f"{op.upper()}({col}): {result}")
-            except Exception as e:
-                print(f"[ERROR] No se pudo procesar {op.upper()}({col})")
-                print(e)
-
-        self.filters = []
-        self.aggregates = []
-
-def generar_arbol_sintactico(tree, parser, output_file="arbol_sintactico"):
-    # Cambia la ruta de salida para guardar en la carpeta 'arboles'
-    base_dir = Path(__file__).parent
-    arboles_dir = base_dir / "arboles"
-    arboles_dir.mkdir(exist_ok=True)
-    output_path = arboles_dir / output_file
-
-    dot = graphviz.Digraph()
-
-    def agregar_nodos(node, parent=None):
-        node_id = str(id(node))
-        if hasattr(node, 'getRuleIndex'):
-            rule_index = node.getRuleIndex()
-            label = parser.ruleNames[rule_index] if rule_index < len(parser.ruleNames) else f"rule_{rule_index}"
-        else:
-            label = node.getText()
-        dot.node(node_id, label)
-        if parent:
-            dot.edge(parent, node_id)
+def generar_arbol_graphviz_png(tree, parser, output_png):
+    def escape(s):
+        return s.replace('"', '\\"')
+    def to_dot(node, ruleNames, node_id=0, nodes=None, edges=None):
+        if nodes is None: nodes = []
+        if edges is None: edges = []
+        label = escape(Trees.getNodeText(node, ruleNames))
+        nodes.append(f'  node{node_id} [label="{label}"];')
+        this_id = node_id
         for i in range(node.getChildCount()):
-            agregar_nodos(node.getChild(i), node_id)
-
-    agregar_nodos(tree)
-    dot.render(str(output_path), format='png', cleanup=True)
-    print(f"[INFO] Árbol visual guardado como: {output_path}.png")
-
-def ejecutar_script(path, mostrar_arbol=False, numero_script=None):
+            child = node.getChild(i)
+            child_id = len(nodes)
+            edges.append(f'  node{this_id} -> node{child_id};')
+            to_dot(child, ruleNames, child_id, nodes, edges)
+        return nodes, edges
+    nodes, edges = to_dot(tree, parser.ruleNames)
+    dot = "digraph G {\n" + "\n".join(nodes) + "\n" + "\n".join(edges) + "\n}"
+    import tempfile
+    with tempfile.NamedTemporaryFile("w+", delete=False, suffix=".gv") as tmpfile:
+        tmpfile.write(dot)
+        tmpfile_path = tmpfile.name
     try:
-        with open(path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Filtrar líneas de comentario
-        content = '\n'.join(line for line in content.split('\n') 
-                  if not line.strip().startswith('#'))
-        
-        input_stream = InputStream(content)
-        lexer = AsistenciaLexer(input_stream)
-        stream = CommonTokenStream(lexer)
-        parser = AsistenciaParser(stream)
-        tree = parser.program()
-        AsistenciaInterpreter().visit(tree)
-        
-        if mostrar_arbol:
-            generar_arbol_sintactico(tree, parser, f"arbol_script_{numero_script}")
-            
+        import subprocess
+        subprocess.run(["dot", "-Tpng", tmpfile_path, "-o", output_png], check=True)
+        print(f"Árbol de sintaxis generado: {output_png}")
     except Exception as e:
-        print(f"\n[ERROR] En script {numero_script}: {str(e)}")
+        print(f"No se pudo generar el PNG del árbol: {e}")
     finally:
-        input("\nPresione Enter para continuar...")
+        try:
+            os.remove(tmpfile_path)
+        except Exception:
+            pass
+
+def mostrar_analisis_sintactico(path, parser, tree):
+    print("2️⃣ Análisis Sintáctico (Árbol de sintaxis):")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    arboles_dir = os.path.join(base_dir, "arboles")
+    os.makedirs(arboles_dir, exist_ok=True)
+    # Usa el nombre del script seleccionado (sin extensión .dsl)
+    nombre = os.path.splitext(os.path.basename(path))[0]
+    # Buscar el nombre real del script si existe en script_names
+    global script_names
+    script_name = None
+    for idx, temp_path in script_tempfiles.items():
+        if temp_path == path:
+            script_name = script_names[idx-1]
+            break
+    if script_name:
+        # Limpia el nombre para archivo (sin espacios ni caracteres especiales)
+        from re import sub
+        nombre_archivo = sub(r'[^a-zA-Z0-9_]', '_', script_name)
+    else:
+        nombre_archivo = nombre
+    output_png = os.path.join(arboles_dir, f"arbol_{nombre_archivo}.png")
+    generar_arbol_graphviz_png(tree, parser, output_png)
+    print("")
 
 def extraer_scripts(script_path):
     encodings = ['utf-8-sig', 'utf-8', 'latin-1']
@@ -156,135 +93,146 @@ def extraer_scripts(script_path):
         raise ValueError("No se pudo leer el archivo con los encodings probados")
 
     script_blocks = []
+    script_names = []
     current_script = []
-    
+    current_name = None
     for line in content.split('\n'):
         stripped = line.strip()
         if stripped.startswith('# Script'):
             if current_script:
                 script_blocks.append('\n'.join(current_script))
+                script_names.append(current_name if current_name else f"Script {len(script_blocks)}")
                 current_script = []
+            # Extraer el nombre del script si está presente después de ":"
+            if ':' in stripped:
+                current_name = stripped.split(':', 1)[1].strip()
+            else:
+                current_name = stripped
         if not stripped.startswith('#'):  # Ignorar líneas de comentario
             current_script.append(line)
-    
     if current_script:
         script_blocks.append('\n'.join(current_script))
-    
-    return script_blocks
+        script_names.append(current_name if current_name else f"Script {len(script_blocks)}")
+    return script_blocks, script_names
 
-def mostrar_menu_scripts(scripts):
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("\n" + "="*60)
-        print(" SELECCIÓN DE SCRIPTS ".center(60))
-        print(f" Disponibles: {len(scripts)} scripts ".center(60))
-        print("="*60)
-        
-        for i, script in enumerate(scripts, 1):
-            # Extraer primera línea no comentada como descripción
-            description = next((line.strip() for line in script.split('\n') 
-                             if line.strip() and not line.strip().startswith('#')), 
-                            f"Script {i}")
-            print(f"{i:2d}. {description[:50]}")  # Mostrar primeros 50 caracteres
+def ejecutar_script(path, script_display_name=None):
+    # Usa el nombre del script para mostrar en encabezado y pie
+    nombre_script = script_display_name if script_display_name else os.path.basename(path)
+    print(f"\n{'='*60}")
+    print(f"        Ejecutando: {nombre_script}".center(60))
+    print(f"{'='*60}")
+    mostrar_analisis_lexico(path)
+    input_stream = FileStream(path, encoding='utf-8')
+    lexer = AsistenciaLexer(input_stream)
+    stream = CommonTokenStream(lexer)
+    parser = AsistenciaParser(stream)
+    tree = parser.program()
+    mostrar_analisis_sintactico(path, parser, tree)
+    print("3️⃣ Resultado del Script:")
 
-        print("\n0. Volver al menú principal")
-        print("="*60)
+    interpreter = AsistenciaInterpreter()
+    interpreter.filters = []
+    interpreter.aggregates = []
 
-        try:
-            opcion = input("\nSeleccione un script (1-{}) o 0 para volver: ".format(len(scripts))).strip()
-            
-            if not opcion or not opcion.isdigit():
-                raise ValueError("Debe ingresar un número válido")
-                
-            opcion = int(opcion)
-            
-            if opcion == 0:
-                return
-            elif 1 <= opcion <= len(scripts):
-                # Preprocesar script: eliminar líneas que comienzan con #
-                clean_script = '\n'.join(line for line in scripts[opcion-1].split('\n') 
-                              if not line.strip().startswith('#'))
-                
-                with tempfile.NamedTemporaryFile(mode='w+', suffix='.dsl', 
-                                              encoding='utf-8', delete=False) as temp:
-                    temp.write(clean_script)
-                    temp_path = temp.name
-                
-                ejecutar_script(temp_path, mostrar_arbol=True, numero_script=opcion)
-                os.unlink(temp_path)
-            else:
-                raise ValueError(f"Número fuera de rango (1-{len(scripts)})")
-                
-        except Exception as e:
-            print(f"\n[ERROR] {str(e)}")
-            input("Presione Enter para continuar...")
+    import io
+    import contextlib
+    output = io.StringIO()
+    with contextlib.redirect_stdout(output):
+        interpreter.visit(tree)
+    resultado = output.getvalue().strip()
 
-def mostrar_menu_principal():
-    base_dir = Path(__file__).parent
-    script_path = base_dir / "script.dsl"
-    csv_path = base_dir / "asistencia_completa.csv"
-
-    if not script_path.exists():
-        print(f"[ERROR] No se encontró script.dsl en {base_dir}")
-        return
-
-    scripts = extraer_scripts(script_path)
-    if not scripts:
-        print("[ERROR] No se pudieron extraer scripts del archivo")
-        return
-
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("\n" + "=" * 50)
-        print(" SISTEMA DE ANÁLISIS DE ASISTENCIA ".center(50))
-        print("=" * 50)
-        print("\n1. Seleccionar script (1-40)")
-        print("2. Ver archivo CSV completo")
-        print("3. Ver lista completa de scripts")
-        print("0. Salir")
-        print("=" * 50)
-
-        try:
-            opcion = input("\nSeleccione una opción: ").strip()
-
-            if not opcion.isdigit():
-                raise ValueError("Debe ingresar un número (0-3).")
-
-            opcion = int(opcion)
-
-            if opcion == 0:
-                break
-            elif opcion == 1:
-                mostrar_menu_scripts(scripts)
-            elif opcion == 2:
-                if csv_path.exists():
-                    df = pd.read_csv(csv_path)
-                    print(f"\nPrimeras 10 filas del CSV:\n{df.head(10)}")
+    if not resultado:
+        if hasattr(interpreter, "data") and interpreter.data is not None:
+            try:
+                df = interpreter.data.copy()
+                if getattr(interpreter, "filters", []):
+                    combined_filter = " & ".join(interpreter.filters)
+                    df = df.query(combined_filter)
+                if not df.empty:
+                    print(df)
+                    print(f"\nFilas encontradas: {len(df)}")
                 else:
-                    print(f"\n[ERROR] No se encontró el archivo CSV en: {csv_path}")
-                input("\nPresione Enter para continuar...")
-            elif opcion == 3:
-                print("\nLISTA COMPLETA DE SCRIPTS DISPONIBLES:")
-                for i, script in enumerate(scripts, 1):
-                    first_line = script.split('\n')[0]
-                    print(f"{i:2d}. {first_line}")
-                input("\nPresione Enter para continuar...")
-            else:
-                print("\n[ERROR] Opción fuera de rango. Debe ser entre 0 y 3.")
-                input("Presione Enter para continuar...")
+                    print("[Sin resultado para mostrar]")
+            except Exception as e:
+                print(f"[Sin resultado para mostrar] ({e})")
+        else:
+            print("[Sin resultado para mostrar]")
+    else:
+        print(resultado)
+    print(f"{'='*60}")
+    print(f"             Fin de: {nombre_script}".center(60))
+    print(f"{'='*60}\n")
+    input("Presione Enter para volver a la selección de scripts...")
 
-        except ValueError as ve:
-            print(f"\n[ERROR] {ve}")
-            input("Presione Enter para continuar...")
-        except Exception as e:
-            print(f"\n[ERROR inesperado] {e}")
-            input("Presione Enter para continuar...")
+def mostrar_menu(scripts, script_names):
+    while True:
+        print("\n" + "="*60)
+        print(" SISTEMA DE ANÁLISIS DE ASISTENCIA ".center(60))
+        print("="*60)
+        print("1. Ejecutar un script")
+        print("2. Ver todos los scripts (sin ejecutar)")
+        print("0. Salir")
+        print("="*60)
+
+        try:
+            opcion = int(input("Seleccione una opción: "))
+        except ValueError:
+            print("Por favor, ingrese un número válido.\n")
+            continue
+
+        if opcion == 0:
+            print("Saliendo del programa.")
+            for temp_path in script_tempfiles.values():
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+            break
+        elif opcion == 1:
+            while True:
+                print("\n" + "="*60)
+                print(" SELECCIÓN DE SCRIPTS ".center(60))
+                print("="*60)
+                print("Seleccione un script para ejecutar:\n")
+                for idx, name in enumerate(script_names, 1):
+                    print(f" {idx:2d}. {name}")
+                print("\n  0. Volver al menú principal")
+                print("="*60)
+                try:
+                    subop = int(input("Ingrese el número del script a ejecutar (0 para volver): "))
+                except ValueError:
+                    print("Por favor, ingrese un número válido.\n")
+                    continue
+                if subop == 0:
+                    break
+                elif 1 <= subop <= len(scripts):
+                    if subop not in script_tempfiles:
+                        with tempfile.NamedTemporaryFile(mode='w+', suffix='.dsl', encoding='utf-8', delete=False) as temp:
+                            temp.write(scripts[subop - 1])
+                            temp_path = temp.name
+                        script_tempfiles[subop] = temp_path
+                    else:
+                        temp_path = script_tempfiles[subop]
+                    try:
+                        ejecutar_script(temp_path, script_display_name=script_names[subop-1])
+                    except Exception as e:
+                        print(f"[ERROR] {e}")
+                else:
+                    print("Opción no válida. Intente de nuevo.\n")
+        elif opcion == 2:
+            print("\n" + "="*60)
+            print(" LISTA DE SCRIPTS DISPONIBLES ".center(60))
+            print("="*60)
+            for idx, name in enumerate(script_names, 1):
+                print(f"\n{'-'*60}\nScript {idx}: {name}\n{'-'*60}")
+                print(scripts[idx-1])
+            print("\nPresione Enter para volver al menú principal.")
+            input()
+        else:
+            print("Opción no válida. Intente de nuevo.\n")
 
 if __name__ == "__main__":
-    try:
-        if len(sys.argv) > 1:
-            ejecutar_script(sys.argv[1], mostrar_arbol=True)
-        else:
-            mostrar_menu_principal()
-    except Exception as e:
-        print(f"\n[ERROR fatal] {e}")
+    script_path = "script.dsl"
+    base_dir = Path(__file__).parent
+    script_path_full = str(base_dir / script_path)
+    scripts, script_names = extraer_scripts(script_path_full)
+    script_tempfiles = {}
+    mostrar_menu(scripts, script_names)
