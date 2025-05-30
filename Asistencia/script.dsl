@@ -173,7 +173,7 @@ print;
 
 # Script 30: Estudiantes con teléfono que termina en "1"
 load "asistencia_completa.csv";
-filter column "telefono_contacto" == "3100000001";
+filter column "telefono_contacto" endswith "1";
 aggregate count column "id_estudiante";
 print;
 

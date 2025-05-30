@@ -16,7 +16,6 @@ class AsistenciaListener(ParseTreeListener):
     def exitProgram(self, ctx:AsistenciaParser.ProgramContext):
         pass
 
-
     # Enter a parse tree produced by AsistenciaParser#scriptComment.
     def enterScriptComment(self, ctx:AsistenciaParser.ScriptCommentContext):
         pass
@@ -24,7 +23,6 @@ class AsistenciaListener(ParseTreeListener):
     # Exit a parse tree produced by AsistenciaParser#scriptComment.
     def exitScriptComment(self, ctx:AsistenciaParser.ScriptCommentContext):
         pass
-
 
     # Enter a parse tree produced by AsistenciaParser#instruction.
     def enterInstruction(self, ctx:AsistenciaParser.InstructionContext):
@@ -34,7 +32,6 @@ class AsistenciaListener(ParseTreeListener):
     def exitInstruction(self, ctx:AsistenciaParser.InstructionContext):
         pass
 
-
     # Enter a parse tree produced by AsistenciaParser#loadStmt.
     def enterLoadStmt(self, ctx:AsistenciaParser.LoadStmtContext):
         pass
@@ -42,7 +39,6 @@ class AsistenciaListener(ParseTreeListener):
     # Exit a parse tree produced by AsistenciaParser#loadStmt.
     def exitLoadStmt(self, ctx:AsistenciaParser.LoadStmtContext):
         pass
-
 
     # Enter a parse tree produced by AsistenciaParser#filterStmt.
     def enterFilterStmt(self, ctx:AsistenciaParser.FilterStmtContext):
@@ -52,7 +48,6 @@ class AsistenciaListener(ParseTreeListener):
     def exitFilterStmt(self, ctx:AsistenciaParser.FilterStmtContext):
         pass
 
-
     # Enter a parse tree produced by AsistenciaParser#filterExpr.
     def enterFilterExpr(self, ctx:AsistenciaParser.FilterExprContext):
         pass
@@ -60,7 +55,6 @@ class AsistenciaListener(ParseTreeListener):
     # Exit a parse tree produced by AsistenciaParser#filterExpr.
     def exitFilterExpr(self, ctx:AsistenciaParser.FilterExprContext):
         pass
-
 
     # Enter a parse tree produced by AsistenciaParser#condition.
     def enterCondition(self, ctx:AsistenciaParser.ConditionContext):
@@ -70,7 +64,6 @@ class AsistenciaListener(ParseTreeListener):
     def exitCondition(self, ctx:AsistenciaParser.ConditionContext):
         pass
 
-
     # Enter a parse tree produced by AsistenciaParser#aggregateStmt.
     def enterAggregateStmt(self, ctx:AsistenciaParser.AggregateStmtContext):
         pass
@@ -79,7 +72,6 @@ class AsistenciaListener(ParseTreeListener):
     def exitAggregateStmt(self, ctx:AsistenciaParser.AggregateStmtContext):
         pass
 
-
     # Enter a parse tree produced by AsistenciaParser#printStmt.
     def enterPrintStmt(self, ctx:AsistenciaParser.PrintStmtContext):
         pass
@@ -87,7 +79,6 @@ class AsistenciaListener(ParseTreeListener):
     # Exit a parse tree produced by AsistenciaParser#printStmt.
     def exitPrintStmt(self, ctx:AsistenciaParser.PrintStmtContext):
         pass
-
 
     # Enter a parse tree produced by AsistenciaParser#value.
     def enterValue(self, ctx:AsistenciaParser.ValueContext):

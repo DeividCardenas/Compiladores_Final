@@ -12,7 +12,7 @@ import graphviz
 from AsistenciaInterpreter import AsistenciaInterpreter
 
 def mostrar_analisis_lexico(path):
-    print("\n1️⃣ Análisis Léxico (Tokens generados):")
+    print("\n1 Análisis Léxico (Tokens generados):")
     input_stream = FileStream(path, encoding='utf-8')
     lexer = AsistenciaLexer(input_stream)
     tokens = []
@@ -57,7 +57,7 @@ def generar_arbol_graphviz_png(tree, parser, output_png):
             pass
 
 def mostrar_analisis_sintactico(path, parser, tree):
-    print("2️⃣ Análisis Sintáctico (Árbol de sintaxis):")
+    print("2 Análisis Sintáctico (Árbol de sintaxis):")
     base_dir = os.path.dirname(os.path.abspath(__file__))
     arboles_dir = os.path.join(base_dir, "arboles")
     os.makedirs(arboles_dir, exist_ok=True)
@@ -116,6 +116,7 @@ def extraer_scripts(script_path):
     return script_blocks, script_names
 
 def ejecutar_script(path, script_display_name=None):
+    # Usa el nombre del script para mostrar en encabezado y pie
     nombre_script = script_display_name if script_display_name else os.path.basename(path)
     print(f"\n{'='*60}")
     print(f"        Ejecutando: {nombre_script}".center(60))
@@ -127,22 +128,7 @@ def ejecutar_script(path, script_display_name=None):
     parser = AsistenciaParser(stream)
     tree = parser.program()
     mostrar_analisis_sintactico(path, parser, tree)
-    # Quitar la línea del resultado del script y el mensaje "[Sin resultado para mostrar]"
-    interpreter = AsistenciaInterpreter()
-    interpreter.filters = []
-    interpreter.aggregates = []
-
-    import io
-    import contextlib
-    output = io.StringIO()
-    with contextlib.redirect_stdout(output):
-        interpreter.visit(tree)
-    resultado = output.getvalue().strip()
-
-    if resultado:
-        print(resultado)
-    # No mostrar nada si no hay resultado
-
+    
     print(f"{'='*60}")
     print(f"             Fin de: {nombre_script}".center(60))
     print(f"{'='*60}\n")
