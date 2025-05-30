@@ -86,9 +86,6 @@ class AsistenciaParser ( Parser ):
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
-
-
-
     class ProgramContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -105,13 +102,11 @@ class AsistenciaParser ( Parser ):
             else:
                 return self.getTypedRuleContext(AsistenciaParser.ScriptCommentContext,i)
 
-
         def instruction(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(AsistenciaParser.InstructionContext)
             else:
                 return self.getTypedRuleContext(AsistenciaParser.InstructionContext,i)
-
 
         def getRuleIndex(self):
             return AsistenciaParser.RULE_program
@@ -123,9 +118,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitProgram" ):
                 listener.exitProgram(self)
-
-
-
 
     def program(self):
 
@@ -166,7 +158,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ScriptCommentContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -187,9 +178,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitScriptComment" ):
                 listener.exitScriptComment(self)
-
-
-
 
     def scriptComment(self):
 
@@ -218,18 +206,14 @@ class AsistenciaParser ( Parser ):
         def loadStmt(self):
             return self.getTypedRuleContext(AsistenciaParser.LoadStmtContext,0)
 
-
         def filterStmt(self):
             return self.getTypedRuleContext(AsistenciaParser.FilterStmtContext,0)
-
 
         def aggregateStmt(self):
             return self.getTypedRuleContext(AsistenciaParser.AggregateStmtContext,0)
 
-
         def printStmt(self):
             return self.getTypedRuleContext(AsistenciaParser.PrintStmtContext,0)
-
 
         def getRuleIndex(self):
             return AsistenciaParser.RULE_instruction
@@ -241,9 +225,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitInstruction" ):
                 listener.exitInstruction(self)
-
-
-
 
     def instruction(self):
 
@@ -284,7 +265,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class LoadStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -306,9 +286,6 @@ class AsistenciaParser ( Parser ):
             if hasattr( listener, "exitLoadStmt" ):
                 listener.exitLoadStmt(self)
 
-
-
-
     def loadStmt(self):
 
         localctx = AsistenciaParser.LoadStmtContext(self, self._ctx, self.state)
@@ -329,7 +306,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class FilterStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -339,7 +315,6 @@ class AsistenciaParser ( Parser ):
 
         def filterExpr(self):
             return self.getTypedRuleContext(AsistenciaParser.FilterExprContext,0)
-
 
         def getRuleIndex(self):
             return AsistenciaParser.RULE_filterStmt
@@ -351,9 +326,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitFilterStmt" ):
                 listener.exitFilterStmt(self)
-
-
-
 
     def filterStmt(self):
 
@@ -375,7 +347,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class FilterExprContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -388,7 +359,6 @@ class AsistenciaParser ( Parser ):
                 return self.getTypedRuleContexts(AsistenciaParser.ConditionContext)
             else:
                 return self.getTypedRuleContext(AsistenciaParser.ConditionContext,i)
-
 
         def LOGICAL_OP(self, i:int=None):
             if i is None:
@@ -406,9 +376,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitFilterExpr" ):
                 listener.exitFilterExpr(self)
-
-
-
 
     def filterExpr(self):
 
@@ -439,7 +406,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ConditionContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -456,7 +422,6 @@ class AsistenciaParser ( Parser ):
         def value(self):
             return self.getTypedRuleContext(AsistenciaParser.ValueContext,0)
 
-
         def getRuleIndex(self):
             return AsistenciaParser.RULE_condition
 
@@ -467,9 +432,6 @@ class AsistenciaParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitCondition" ):
                 listener.exitCondition(self)
-
-
-
 
     def condition(self):
 
@@ -492,7 +454,6 @@ class AsistenciaParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class AggregateStmtContext(ParserRuleContext):
         __slots__ = 'parser'
@@ -518,9 +479,6 @@ class AsistenciaParser ( Parser ):
             if hasattr( listener, "exitAggregateStmt" ):
                 listener.exitAggregateStmt(self)
 
-
-
-
     def aggregateStmt(self):
 
         localctx = AsistenciaParser.AggregateStmtContext(self, self._ctx, self.state)
@@ -545,7 +503,6 @@ class AsistenciaParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class PrintStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
@@ -565,9 +522,6 @@ class AsistenciaParser ( Parser ):
             if hasattr( listener, "exitPrintStmt" ):
                 listener.exitPrintStmt(self)
 
-
-
-
     def printStmt(self):
 
         localctx = AsistenciaParser.PrintStmtContext(self, self._ctx, self.state)
@@ -585,7 +539,6 @@ class AsistenciaParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ValueContext(ParserRuleContext):
         __slots__ = 'parser'
@@ -611,9 +564,6 @@ class AsistenciaParser ( Parser ):
             if hasattr( listener, "exitValue" ):
                 listener.exitValue(self)
 
-
-
-
     def value(self):
 
         localctx = AsistenciaParser.ValueContext(self, self._ctx, self.state)
@@ -635,8 +585,3 @@ class AsistenciaParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
-
-
-
-

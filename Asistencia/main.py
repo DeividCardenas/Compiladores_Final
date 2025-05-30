@@ -116,7 +116,6 @@ def extraer_scripts(script_path):
     return script_blocks, script_names
 
 def ejecutar_script(path, script_display_name=None):
-    # Usa el nombre del script para mostrar en encabezado y pie
     nombre_script = script_display_name if script_display_name else os.path.basename(path)
     print(f"\n{'='*60}")
     print(f"        Ejecutando: {nombre_script}".center(60))
@@ -128,8 +127,7 @@ def ejecutar_script(path, script_display_name=None):
     parser = AsistenciaParser(stream)
     tree = parser.program()
     mostrar_analisis_sintactico(path, parser, tree)
-    print("3️⃣ Resultado del Script:")
-
+    # Quitar la línea del resultado del script y el mensaje "[Sin resultado para mostrar]"
     interpreter = AsistenciaInterpreter()
     interpreter.filters = []
     interpreter.aggregates = []
@@ -141,24 +139,10 @@ def ejecutar_script(path, script_display_name=None):
         interpreter.visit(tree)
     resultado = output.getvalue().strip()
 
-    if not resultado:
-        if hasattr(interpreter, "data") and interpreter.data is not None:
-            try:
-                df = interpreter.data.copy()
-                if getattr(interpreter, "filters", []):
-                    combined_filter = " & ".join(interpreter.filters)
-                    df = df.query(combined_filter)
-                if not df.empty:
-                    print(df)
-                    print(f"\nFilas encontradas: {len(df)}")
-                else:
-                    print("[Sin resultado para mostrar]")
-            except Exception as e:
-                print(f"[Sin resultado para mostrar] ({e})")
-        else:
-            print("[Sin resultado para mostrar]")
-    else:
+    if resultado:
         print(resultado)
+    # No mostrar nada si no hay resultado
+
     print(f"{'='*60}")
     print(f"             Fin de: {nombre_script}".center(60))
     print(f"{'='*60}\n")
